@@ -30,7 +30,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           id: "1",
           name: "Divya Namdev",
           email: "jojo@jojo.com",
-          // role: "admin",
+          role: "admin",
         };
 
         if (!user) {
@@ -72,6 +72,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
   },
   pages: {
-    signIn: "/auth/signin",
+    signIn: "/auth/signin", // Default sign-in page
+  },
+  // Redirect to home page if no callbackUrl is provided
+  callbacks: {
+    redirect({ url, baseUrl }) {
+      // Redirect to baseUrl (home page) if callbackUrl is not defined
+      return url.startsWith(baseUrl) ? url : baseUrl;
+    },
   },
 });
