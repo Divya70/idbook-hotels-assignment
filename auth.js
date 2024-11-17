@@ -30,7 +30,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           id: "1",
           name: "Divya Namdev",
           email: "jojo@jojo.com",
-          role: "admin",
+          // role: "admin",
         };
 
         if (!user) {
