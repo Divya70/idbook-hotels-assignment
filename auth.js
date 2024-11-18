@@ -51,7 +51,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return Response.redirect(new URL("/", nextUrl));
       }
       if (pathname.startsWith("/dashboard") && role !== "admin") {
-        return Response.redirect(new URL("/", nextUrl));
+        return Response.redirect(new URL("/auth/signin", nextUrl));
       }
       return !!auth;
     },
