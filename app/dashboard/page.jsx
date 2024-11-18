@@ -12,7 +12,7 @@ export default function Dashboard() {
       >
         Update session
       </button>
-      <h1>Can be accessed by any user.</h1>
+      <h1>Can only be accessed by admin user.</h1>;
     </>
   );
 }

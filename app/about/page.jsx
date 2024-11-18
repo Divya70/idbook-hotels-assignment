@@ -1,3 +1,3 @@
 export default function About() {
-  return <h1>Can only be accessed by admin user.</h1>;
+  return <h1>Can be accessed by any user.</h1>;
 }
