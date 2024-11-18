@@ -10,6 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 // import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { FaGithub } from "react-icons/fa";
 import ErrorMessage from "@/components/ErrorMessage";
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
@@ -52,6 +53,22 @@ const Signin = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
+          <form className="w-full " action={handleGithubSignin}>
+            <Button
+              variant="outline"
+              className="w-full bg-blue-100 rounded-md py-5"
+              type="submit"
+            >
+              <FaGithub className="h-4 w-4 mr-2" />
+              {/* <GitHubLogoIcon className="h-4 w-4 mr-2" /> */}
+              <span className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
+                Sign in with GitHub
+              </span>
+            </Button>
+          </form>
+          <span className="text-sm text-gray-500 text-center block my-2">
+            or
+          </span>
           {globalError && <ErrorMessage error={globalError} />}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -60,7 +77,9 @@ const Signin = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel className="nc-Label text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                      Email <span className="text-red-600">*</span>
+                    </FormLabel>
                     <FormControl>
                       <Input
                         type="email"
@@ -79,7 +98,9 @@ const Signin = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel className="nc-Label text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                      Password <span className="text-red-600">*</span>
+                    </FormLabel>
                     <FormControl>
                       <Input
                         type="password"
@@ -96,16 +117,6 @@ const Signin = () => {
               <LoadingButton pending={form.formState.isSubmitting} />
             </form>
           </Form>
-
-          <span className="text-sm text-gray-500 text-center block my-2">
-            or
-          </span>
-          <form className="w-full" action={handleGithubSignin}>
-            {/* <Button variant="outline" className="w-full" type="submit">
-              <GitHubLogoIcon className="h-4 w-4 mr-2" />
-              Sign in with GitHub
-            </Button> */}
-          </form>
         </CardContent>
       </Card>
     </div>

@@ -2,7 +2,11 @@ import { Button } from "@/components/ui/button";
 
 export default function LoadingButton({ pending }) {
   return (
-    <Button className="w-full" type="submit" disabled={pending}>
+    <Button
+      className="w-full bg-blue-600 rounded-full py-5"
+      type="submit"
+      disabled={pending}
+    >
       {pending ? (
         <div className="flex items-center justify-center">
           <svg
