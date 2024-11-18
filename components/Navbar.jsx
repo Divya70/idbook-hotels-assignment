@@ -2,13 +2,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/auth";
 import { handleSignOut } from "@/app/actions/authActions";
-import Dashboard from "../app/dashboard/page";
-import About from "../app/about/page";
 export default async function Navbar() {
   const session = await auth();
   console.log({ session });
   return (
     <nav className="flex justify-between items-center py-3 px-4 bg-white shadow-md ">
+      {/* Logo Text */}
       <Link href="/" className="text-xl font-bold">
         Idbook Hotels
       </Link>
@@ -16,6 +15,7 @@ export default async function Navbar() {
         <Link href={"/dashboard"}>Dashboard</Link>
         <Link href={"/about"}>About</Link>
       </div>
+      {/* Signin and signout buttons */}
       {!session ? (
         <Link href="/auth/signin">
           <Button

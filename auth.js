@@ -29,7 +29,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         user = {
           id: "1",
           name: "Divya Namdev",
-          email: "jojo@jojo.com",
+          email: "divyanamdev@gmail.com",
           role: "admin",
         };
 

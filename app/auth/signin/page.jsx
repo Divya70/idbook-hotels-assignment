@@ -9,7 +9,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-// import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { FaGithub } from "react-icons/fa";
 import ErrorMessage from "@/components/ErrorMessage";
 import { Input } from "@/components/ui/input";
@@ -22,8 +21,12 @@ import {
   handleCredentialsSignin,
   handleGithubSignin,
 } from "@/app/actions/authActions";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Signin = () => {
   const [globalError, setGlobalError] = useState("");
+
+  // React hook form
   const form = useForm({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -32,7 +35,7 @@ const Signin = () => {
     },
   });
 
-  //Handle Submit method
+  //Handle Submit logic
   const onSubmit = async (values) => {
     try {
       const result = await handleCredentialsSignin(values);
@@ -60,7 +63,6 @@ const Signin = () => {
               type="submit"
             >
               <FaGithub className="h-4 w-4 mr-2" />
-              {/* <GitHubLogoIcon className="h-4 w-4 mr-2" /> */}
               <span className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
                 Sign in with GitHub
               </span>
@@ -72,6 +74,7 @@ const Signin = () => {
           {globalError && <ErrorMessage error={globalError} />}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              {/* Email Input Field */}
               <FormField
                 control={form.control}
                 name="email"
@@ -92,7 +95,7 @@ const Signin = () => {
                   </FormItem>
                 )}
               />
-
+              {/* Password input field */}
               <FormField
                 control={form.control}
                 name="password"
@@ -112,8 +115,7 @@ const Signin = () => {
                   </FormItem>
                 )}
               />
-
-              {/* Submit button will go here */}
+              {/* Sing in and loading button */}
               <LoadingButton pending={form.formState.isSubmitting} />
             </form>
           </Form>

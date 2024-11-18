@@ -3,6 +3,7 @@
 import { signIn, signOut } from "@/auth";
 import { AuthError } from "next-auth";
 
+// Credentails login logic
 export async function handleCredentialsSignin({ email, password }) {
   try {
     await signIn("credentials", { email, password, redirectTo: "/" });
@@ -23,10 +24,12 @@ export async function handleCredentialsSignin({ email, password }) {
   }
 }
 
+// Github login logic
 export async function handleGithubSignin() {
   await signIn("github", { redirectTo: "/" });
 }
 
+// Signout logic
 export async function handleSignOut() {
   await signOut();
 }

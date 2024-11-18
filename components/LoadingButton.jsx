@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 
 export default function LoadingButton({ pending }) {
   return (
+    // Loading and sign in button
     <Button
       className="w-full bg-blue-600 rounded-full py-5"
       type="submit"
