@@ -11,10 +11,6 @@ export default async function Navbar() {
       <Link href="/" className="text-xl font-bold">
         Idbook Hotels
       </Link>
-      <div className="flex gap-6">
-        <Link href={"/dashboard"}>Dashboard</Link>
-        <Link href={"/about"}>About</Link>
-      </div>
       {/* Signin and signout buttons */}
       {!session ? (
         <Link href="/auth/signin">

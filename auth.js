@@ -50,9 +50,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (pathname.startsWith("/auth/signin") && isLoggedIn) {
         return Response.redirect(new URL("/", nextUrl));
       }
-      if (pathname.startsWith("/dashboard") && role !== "admin") {
-        return Response.redirect(new URL("/auth/signin", nextUrl));
-      }
+      // if (pathname.startsWith("/dashboard") && role !== "admin") {
+      //   return Response.redirect(new URL("/auth/signin", nextUrl));
+      // }
       return !!auth;
     },
     jwt({ token, user, trigger, session }) {
