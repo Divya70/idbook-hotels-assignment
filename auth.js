@@ -2,43 +2,60 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Github from "next-auth/providers/github";
 import { signInSchema } from "./lib/zod";
-
+import { users } from "@/mock/user";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Github,
+    // Credentials({
+    //   credentials: {
+    //     email: { label: "Email", type: "email", placeholder: "Email" },
+    //     password: {
+    //       label: "Password",
+    //       type: "password",
+    //       placeholder: "Password",
+    //     },
+    //   },
+    //   async authorize(credentials) {
+    //     let user = null;
+
+    //     // validate credentials
+    //     const parsedCredentials = signInSchema.safeParse(credentials);
+    //     if (!parsedCredentials.success) {
+    //       console.error("Invalid credentials:", parsedCredentials.error.errors);
+    //       return null;
+    //     }
+    //     // get user
+
+    //     user = {
+    //       id: "1",
+    //       name: "Divya Namdev",
+    //       email: "divyanamdev@gmail.com",
+    //       role: "admin",
+    //     };
+
+    //     if (!user) {
+    //       console.log("Invalid credentials");
+    //       return null;
+    //     }
+
+    //     return user;
+    //   },
+    // }),
     Credentials({
+      name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "Email" },
-        password: {
-          label: "Password",
-          type: "password",
-          placeholder: "Password",
-        },
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        let user = null;
-
-        // validate credentials
-        const parsedCredentials = signInSchema.safeParse(credentials);
-        if (!parsedCredentials.success) {
-          console.error("Invalid credentials:", parsedCredentials.error.errors);
-          return null;
+        const user = users.find(
+          (u) =>
+            u.email === credentials.email && u.password === credentials.password
+        );
+        if (user) {
+          return { email: user.email, role: user.role };
         }
-        // get user
-
-        user = {
-          id: "1",
-          name: "Divya Namdev",
-          email: "divyanamdev@gmail.com",
-          role: "admin",
-        };
-
-        if (!user) {
-          console.log("Invalid credentials");
-          return null;
-        }
-
-        return user;
+        return null;
       },
     }),
   ],

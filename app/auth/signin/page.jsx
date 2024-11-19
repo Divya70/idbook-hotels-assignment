@@ -9,6 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import RoleSwitcher from "../../../components/RoleSwitcher";
 import { FaGithub } from "react-icons/fa";
 import ErrorMessage from "@/components/ErrorMessage";
 import { Input } from "@/components/ui/input";
@@ -25,7 +26,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Signin = () => {
   const [globalError, setGlobalError] = useState("");
-
+  const [role, setRole] = useState("user");
   // React hook form
   const form = useForm({
     resolver: zodResolver(signInSchema),
@@ -40,7 +41,7 @@ const Signin = () => {
     try {
       const result = await handleCredentialsSignin(values);
       if (result?.message) {
-        setGlobalError(result.message);
+        role, setGlobalError(result.message);
       }
     } catch (error) {
       console.log("An unexpected error occurred. Please try again.");
@@ -115,7 +116,8 @@ const Signin = () => {
                   </FormItem>
                 )}
               />
-              {/* Sing in and loading button */}
+              <RoleSwitcher in role={role} setRole={setRole} />
+              {/* Sin and loading button */}
               <LoadingButton pending={form.formState.isSubmitting} />
             </form>
           </Form>
@@ -126,3 +128,78 @@ const Signin = () => {
 };
 
 export default Signin;
+
+// "use client";
+
+// import { signIn } from "next-auth/react";
+// import { useState } from "react";
+// import { z } from "zod";
+// import { zodResolver } from "@hookform/resolvers/zod";
+// import { useForm } from "react-hook-form";
+// import RoleSwitcher from "../../../components/RoleSwitcher";
+// import LoadingButton from "@/components/LoadingButton";
+// const schema = z.object({
+//   email: z.string().email("Invalid email"),
+//   password: z.string().min(6, "Password must be at least 6 characters"),
+// });
+
+// export default function Signin() {
+//   const [role, setRole] = useState("user");
+//   const {
+//     register,
+//     handleSubmit,
+//     formState: { errors },
+//   } = useForm({ resolver: zodResolver(schema) });
+
+//   const onSubmit = async (data) => {
+//     const result = await signIn("credentials", {
+//       redirect: false,
+//       ...data,
+//       role,
+//     });
+//     if (result.error) {
+//       alert("Invalid credentials");
+//     }
+//   };
+
+//   return (
+//     <div className="flex items-center justify-center h-screen bg-gray-100">
+//       <div className="p-8 bg-white rounded shadow-md w-96">
+//         <h2 className="text-2xl font-bold mb-4">Sign In</h2>
+//         <form onSubmit={handleSubmit(onSubmit)}>
+//           <div className="mb-4">
+//             <label className="block mb-1 text-sm font-medium">Email</label>
+//             <input
+//               {...register("email")}
+//               className="w-full px-3 py-2 border rounded"
+//               type="text"
+//             />
+//             {errors.email && (
+//               <p className="text-red-500 text-sm">{errors.email.message}</p>
+//             )}
+//           </div>
+//           <div className="mb-4">
+//             <label className="block mb-1 text-sm font-medium">Password</label>
+//             <input
+//               {...register("password")}
+//               className="w-full px-3 py-2 border rounded"
+//               type="password"
+//             />
+//             {errors.password && (
+//               <p className="text-red-500 text-sm">{errors.password.message}</p>
+//             )}
+//           </div>
+//           <RoleSwitcher role={role} setRole={setRole} />
+//           {/* <button
+//             type="submit"
+//             className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600"
+//           >
+//             Sign In
+//           </button> */}
+//           {/* Sing in and loading button */}
+//           <LoadingButton pending={form.formState.isSubmitting} />
+//         </form>
+//       </div>
+//     </div>
+//   );
+// }
