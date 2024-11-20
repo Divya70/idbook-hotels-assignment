@@ -92,10 +92,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: "/auth/signin", // Default sign-in page
   },
   // Redirect to home page if no callbackUrl is provided
-  callbacks: {
-    redirect({ url, baseUrl }) {
-      // Redirect to baseUrl (home page) if callbackUrl is not defined
-      return url.startsWith(baseUrl) ? url : baseUrl;
-    },
-  },
+  // callbacks: {
+  //   redirect({ url, baseUrl }) {
+  //     // Redirect to baseUrl (home page) if callbackUrl is not defined
+  //     return url.startsWith(baseUrl) ? url : baseUrl;
+  //   },
+  // },
 });
